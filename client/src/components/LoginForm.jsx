@@ -97,7 +97,7 @@ const LoginForm = () => {
           type="submit"
           variant="success"
         >
-          Submit
+          Login
         </Button>
       </Form>
     </>
