@@ -1,4 +1,5 @@
 const typeDefs = `
+// User type defines the structure for a User object
   type User {
     _id: ID!
     username: String!
@@ -7,6 +8,7 @@ const typeDefs = `
     savedBooks: [Book]
   }
 
+// Book type defines the structure for a Book object
   type Book {
     bookId: ID!
     authors: [String]
@@ -16,11 +18,13 @@ const typeDefs = `
     title: String!
   }
 
+// Auth type defines the structure for an Auth object
   type Auth {
     token: ID!
     user: User
   }
 
+// BookInput type defines the structure for a BookInput object
   input BookInput {
   bookId: String!
   authors: [String]
@@ -30,11 +34,12 @@ const typeDefs = `
   link: String
   }
 
-
+// Query type defines the structure for a Query object  
   type Query {
     me: User
   }
 
+// Mutation type defines the structure for a Mutation object
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
