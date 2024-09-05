@@ -46,7 +46,7 @@ const SavedBooks = () => {
       {error && <p className="text-danger">Error occurred while deleting the book.</p>}
       <div className="text-light bg-dark p-5">
         <Container fluid>
-          <h1>Viewing {userData.username}&aposs books!</h1>
+          <h1>Viewing {userData.username}&apos;s books!</h1>
         </Container>
       </div>
       <Container>

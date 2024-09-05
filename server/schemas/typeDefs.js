@@ -22,13 +22,14 @@ const typeDefs = `
   }
 
   input BookInput {
-    authors: [String]
-    description: String!
-    bookId: String!
-    image: String
-    link: String
-    title: String!
+  bookId: String!
+  authors: [String]
+  title: String!
+  description: String
+  image: String
+  link: String
   }
+
 
   type Query {
     me: User

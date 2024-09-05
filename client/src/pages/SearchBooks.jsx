@@ -55,6 +55,7 @@ const SearchBooks = () => {
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || '',
+        infoLink: book.volumeInfo.infoLink || '', // Get the link to Google Books
       }));
 
       setSearchedBooks(bookData);
@@ -66,24 +67,39 @@ const SearchBooks = () => {
 
   const handleSaveBook = async (bookId) => {
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
-
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
+  
     if (!token) {
+      console.log("No token found, user is not logged in.");
       return false;
     }
-
+  
+    if (!bookToSave) {
+      console.error("Error: Book data not found.");
+      return;
+    }
+  
     try {
       await saveBook({
-        variables: { bookData: { ...bookToSave } },
+        variables: {
+          bookData: {
+            bookId: bookToSave.bookId,
+            authors: bookToSave.authors || ["N/A"],
+            title: bookToSave.title,
+            description: bookToSave.description || "",
+            image: bookToSave.image || "",
+            link: bookToSave.infoLink || "",
+          }
+        }
       });
-
+  
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+  
     } catch (err) {
-      console.error(err);
+      console.error("Error saving book:", err);
     }
   };
-
+  
   return (
     <>
       {error && <p className="text-danger">Error occurred while saving the book.</p>}
@@ -134,6 +150,16 @@ const SearchBooks = () => {
                     <Card.Title>{book.title}</Card.Title>
                     <p className="small">Authors: {book.authors}</p>
                     <Card.Text>{book.description}</Card.Text>
+                    <Button
+                      as="a"
+                      href={book.infoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="primary"
+                      className="mb-2"
+                    >
+                      View on Google Books
+                    </Button>
                     {Auth.loggedIn() && (
                       <Button
                         disabled={savedBookIds?.some(
