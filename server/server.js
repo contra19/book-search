@@ -44,7 +44,7 @@ const startApolloServer = async () => {
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`); // Log the API server is running
-      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`); // Log the GraphQL endpoint
+      console.log(`Use GraphQL at https://book-search-czj9.onrender.com${PORT}/graphql`); // Log the GraphQL endpoint
     });
   });
 };
